@@ -113,7 +113,7 @@ namespace unvell.ReoGrid
 		/// <summary>
 		/// Default number of rows
 		/// </summary>
-		internal const int DefaultRows = 200;
+		internal const int DefaultRows = 20000;
 
 		/// <summary>
 		/// Default button size of outlinetextColor buttons
