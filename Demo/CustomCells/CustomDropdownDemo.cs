@@ -49,17 +49,19 @@ namespace unvell.ReoGrid.Demo.CustomCells
 				VAlign = ReoGridVerAlign.Middle,
 			});
 
-			worksheet.ColumnHeaders["C"].Width = 120;
+            worksheet.FreezeToCell(1, 3, FreezeArea.LeftTop);
 
-			worksheet["B3"] = "Item 1:";
-			worksheet["C3"] = "Choose...";
-			worksheet["C3"] = new ListViewDropdownCell();
-			worksheet.Ranges["C3"].BorderOutside = RangeBorderStyle.GraySolid;
+            worksheet.ColumnHeaders["C"].Width = 120;
 
-			worksheet["B5"] = "Item 2:";
-			worksheet["C5"] = "Choose...";
-			worksheet["C5"] = new ListViewDropdownCell();
-			worksheet.Ranges["C5"].BorderOutside = RangeBorderStyle.GraySolid;
+			worksheet["A3"] = "Item 1:";
+			worksheet["B3"] = "Choose...";
+			worksheet["B3"] = new ListViewDropdownCell();
+			worksheet.Ranges["B3"].BorderOutside = RangeBorderStyle.GraySolid;
+
+			worksheet["F1"] = "Item 2:";
+			worksheet["G1"] = "Choose...";
+			worksheet["G1"] = new ListViewDropdownCell();
+			worksheet.Ranges["G1"].BorderOutside = RangeBorderStyle.GraySolid;
 		}
 
 		private void chkGridlines_CheckedChanged(object sender, EventArgs e)

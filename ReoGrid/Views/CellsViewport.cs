@@ -2077,8 +2077,8 @@ namespace unvell.ReoGrid.Views
 
 			if (viewport == null)
 			{
-				p = new Point(sheet.cols[pos.Col].Left * view.ScaleFactor + view.Left,
-					sheet.rows[pos.Row].Top * view.ScaleFactor + view.Top);
+				p = new Point(sheet.cols[pos.Col].Left * view.ScaleFactor + view.Left + 40,
+					sheet.rows[pos.Row].Top * view.ScaleFactor + view.Top + 18);
 			}
 			else
 			{
