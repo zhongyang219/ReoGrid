@@ -822,7 +822,10 @@ namespace unvell.ReoGrid.WinForm
 				c = Math.Cos(d);
 			}
 
-			lock (sf)
+            if (sf == null)
+                return new Graphics.Size();
+
+            lock (sf)
 			{
 				// merged cell need word break automatically
 				if (style.TextWrapMode == TextWrapMode.NoWrap)
