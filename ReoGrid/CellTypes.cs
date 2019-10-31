@@ -2419,11 +2419,30 @@ namespace unvell.ReoGrid.CellTypes
 
 			Point p;
 
+            sheet.ViewportController.SetFocus();
+
             Views.IView view = null;
             //if (Cell.Row == 0)
-                view = sheet.ViewportController.FocusView;
+                //view = sheet.ViewportController.FocusView;
             //else
             //    view = sheet.ViewportController.View;
+
+            Point cellCenter = new Point();
+            cellCenter.X = Cell.Bounds.Left + Cell.Bounds.Width/2;
+            cellCenter.Y = Cell.Bounds.Top + Cell.Bounds.Height/2;
+            var children = sheet.ViewportController.View.Children;
+
+            //Find the veiwport that contains the current cell
+            foreach(var curView in children)
+            {
+                Views.IViewport viewport = curView as Views.IViewport;
+                if (viewport != null)
+                {
+                    if (cellCenter.X > curView.Bounds.Left && cellCenter.X < curView.Bounds.Right
+                        && cellCenter.Y > curView.Bounds.Top && cellCenter.Y < curView.Bounds.Bottom)
+                        view = curView;
+                }
+            }
 
             if (sheet != null && this.DropdownControl != null
 				&& Views.CellsViewport.TryGetCellPositionToControl(view, this.Cell.InternalPos, out p))

@@ -2077,13 +2077,15 @@ namespace unvell.ReoGrid.Views
 
 			if (viewport == null)
 			{
-				p = new Point(sheet.cols[pos.Col].Left * view.ScaleFactor + view.Left + 40,
-					sheet.rows[pos.Row].Top * view.ScaleFactor + view.Top + 18);
+				p = new Point(sheet.cols[pos.Col].Left * view.ScaleFactor + view.Left,
+					sheet.rows[pos.Row].Top * view.ScaleFactor + view.Top);
 			}
 			else
 			{
 				p = new Point(sheet.cols[pos.Col].Left * view.ScaleFactor + viewport.Left - viewport.ViewLeft * view.ScaleFactor,
 					sheet.rows[pos.Row].Top * view.ScaleFactor + viewport.Top - viewport.ViewTop * view.ScaleFactor);
+                if (pos.Row == 0)
+                    p.Y += 18;
 			}
 
 			return true;
