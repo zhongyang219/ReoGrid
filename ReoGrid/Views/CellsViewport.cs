@@ -2084,11 +2084,13 @@ namespace unvell.ReoGrid.Views
 			{
 				p = new Point(sheet.cols[pos.Col].Left * view.ScaleFactor + viewport.Left - viewport.ViewLeft * view.ScaleFactor,
 					sheet.rows[pos.Row].Top * view.ScaleFactor + viewport.Top - viewport.ViewTop * view.ScaleFactor);
-                if (pos.Row == 0)
+                if (viewport.Top == 0)
                     p.Y += 18;
-			}
+                if (viewport.Left == 0)
+                    p.X += 40;
+            }
 
-			return true;
+            return true;
 		}
 
 		internal static bool SelectDragCornerHitTest(Worksheet sheet, Point location)

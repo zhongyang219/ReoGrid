@@ -68,9 +68,14 @@ namespace unvell.ReoGrid.Demo.CustomCells
 		{
 			worksheet.SetSettings(WorksheetSettings.View_ShowGridLine, chkGridlines.Checked);
 		}
-	}
 
-	class ListViewDropdownCell : DropdownCell
+        private void button1_Click(object sender, EventArgs e)
+        {
+            worksheet.DeleteRows(worksheet.SelectionRange.Row, 1);
+        }
+    }
+
+    class ListViewDropdownCell : DropdownCell
 	{
 		private ListView listView;
 

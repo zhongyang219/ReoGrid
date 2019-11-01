@@ -82,10 +82,10 @@ namespace unvell.ReoGrid
 			{
 				this.viewportController.UpdateController();
 
-				if (this.IsFrozen)
-				{
-					this.FreezeToCell(this.FreezePos, this.FreezeArea);
-				}
+				//if (this.IsFrozen)
+				//{
+				//	this.FreezeToCell(this.FreezePos, this.FreezeArea);
+				//}
 			}
 
 #if PRINT // TODO: why do this here

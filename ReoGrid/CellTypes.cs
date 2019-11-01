@@ -2435,7 +2435,7 @@ namespace unvell.ReoGrid.CellTypes
             //Find the veiwport that contains the current cell
             foreach(var curView in children)
             {
-                Views.IViewport viewport = curView as Views.IViewport;
+                Views.IViewport viewport = curView as Views.SheetViewport;
                 if (viewport != null)
                 {
                     if (cellCenter.X > curView.Bounds.Left && cellCenter.X < curView.Bounds.Right
@@ -2443,6 +2443,31 @@ namespace unvell.ReoGrid.CellTypes
                         view = curView;
                 }
             }
+
+            //If there is no viewport contains the current cell, find the nearest viewport
+            if (view == null)
+            {
+                double minDistance = double.MaxValue;
+                foreach (var curView in children)
+                {
+                    Views.IViewport viewport = curView as Views.IViewport;
+                    if (viewport != null)
+                    {
+                        Point viewCenterPos = new Point();
+                        viewCenterPos.X = curView.Bounds.Left + curView.Bounds.Width / 2;
+                        viewCenterPos.Y = curView.Bounds.Top + curView.Bounds.Height / 2;
+                        double distance = Math.Sqrt((viewCenterPos.X - cellCenter.X) * (viewCenterPos.X - cellCenter.X) + (viewCenterPos.Y - cellCenter.Y) * (viewCenterPos.Y - cellCenter.Y));
+                        if (distance < minDistance)
+                        {
+                            minDistance = distance;
+                            view = curView;
+                        }
+                    }
+                }
+            }
+
+            if (view == null)
+                view = sheet.ViewportController.FocusView;
 
             if (sheet != null && this.DropdownControl != null
 				&& Views.CellsViewport.TryGetCellPositionToControl(view, this.Cell.InternalPos, out p))
