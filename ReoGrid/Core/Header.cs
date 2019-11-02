@@ -431,7 +431,7 @@ namespace unvell.ReoGrid
 			SetRowsHeight(row, count, r => height, true);
 		}
 
-		internal void SetRowsHeight(int row, int count, Func<int, int> heightGetter, bool processOutlines)
+		internal void SetRowsHeight(int row, int count, Func<int, int> heightGetter, bool processOutlines, bool update = true)
 		{
 #if DEBUG
 			Stopwatch watch = Stopwatch.StartNew();
@@ -550,7 +550,8 @@ namespace unvell.ReoGrid
 						if (cell.IsEndMergedCell)
 						{
 							Cell mergedStartCell = GetCell(cell.MergeStartPos);
-							UpdateCellBounds(mergedStartCell);
+                            if (update)
+                                UpdateCellBounds(mergedStartCell);
 						}
 						else
 						{
@@ -561,7 +562,8 @@ namespace unvell.ReoGrid
 							if (cell.InternalRow < applyEndRow && cell.Colspan == 1 && cell.Rowspan == 1)
 							{
 								cell.Height = height + 1;
-								UpdateCellTextBounds(cell);
+                                if (update)
+                                    UpdateCellTextBounds(cell);
 							}
 
 							cell.UpdateContentBounds();
@@ -2699,16 +2701,16 @@ namespace unvell.ReoGrid
 		/// <param name="count">Number of rows to be hidden.</param>
 		public void HideRows(int row, int count)
 		{
-			SetRowsHeight(row, count, 0);
-		}
+            SetRowsHeight(row, count, r => 0, true, false);
+        }
 
-		/// <summary>
-		/// Show specified rows.
-		/// </summary>
-		/// <seealso cref="HideRows(int, int)"/>
-		/// <param name="row">Number of row start to show.</param>
-		/// <param name="count">Number of rows to show.</param>
-		public void ShowRows(int row, int count)
+        /// <summary>
+        /// Show specified rows.
+        /// </summary>
+        /// <seealso cref="HideRows(int, int)"/>
+        /// <param name="row">Number of row start to show.</param>
+        /// <param name="count">Number of rows to show.</param>
+        public void ShowRows(int row, int count)
 		{
 			SetRowsHeight(row, count, r =>
 			{
@@ -2716,7 +2718,7 @@ namespace unvell.ReoGrid
 
 				// just show row which is hidden
 				return rowhead.IsVisible ? rowhead.InnerHeight : rowhead.LastHeight;
-			}, true);
+			}, true, false);
 		}
 
 		/// <summary>
