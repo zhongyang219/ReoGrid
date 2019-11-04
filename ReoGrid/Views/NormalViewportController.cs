@@ -1008,9 +1008,23 @@ namespace unvell.ReoGrid.Views
 
 		public virtual void ScrollToRange(RangePosition range, CellPosition basePos)
 		{
-			var view = this.FocusView as Viewport;
+            //var view = this.FocusView as Viewport;
+            IViewport view = null;
+            float maxHeight = 0;
+            foreach (var curView in this.View.Children)
+            {
+                IViewport viewport = curView as Views.SheetViewport;
+                if (viewport != null)
+                {
+                    if (viewport.Bounds.Height > maxHeight)
+                    {
+                        maxHeight = viewport.Bounds.Height;
+                        view = viewport;
+                    }
+                }
+            }
 
-			if (view != null)
+            if (view != null)
 			{
 				Rectangle rect = this.worksheet.GetScaledRangeBounds(range);
 

@@ -602,7 +602,7 @@ namespace unvell.ReoGrid
 #endif // DRAWING
 			#endregion // Offset Floating Objects
 
-			UpdateViewportController();
+			UpdateViewportController(update);
 
 			// Raise events
 			if (!suspendingUIUpdates)
@@ -2704,13 +2704,13 @@ namespace unvell.ReoGrid
             SetRowsHeight(row, count, r => 0, true, false);
         }
 
-        /// <summary>
-        /// Show specified rows.
-        /// </summary>
-        /// <seealso cref="HideRows(int, int)"/>
-        /// <param name="row">Number of row start to show.</param>
-        /// <param name="count">Number of rows to show.</param>
-        public void ShowRows(int row, int count)
+		/// <summary>
+		/// Show specified rows.
+		/// </summary>
+		/// <seealso cref="HideRows(int, int)"/>
+		/// <param name="row">Number of row start to show.</param>
+		/// <param name="count">Number of rows to show.</param>
+		public void ShowRows(int row, int count)
 		{
 			SetRowsHeight(row, count, r =>
 			{

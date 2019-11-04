@@ -69,7 +69,7 @@ namespace unvell.ReoGrid
 			set { this.viewportController = value; }
 		}
 
-		internal void UpdateViewportController()
+		internal void UpdateViewportController(bool doFreeze = true)
 		{
 			if (this.suspendingUIUpdates) return;
 
@@ -82,11 +82,11 @@ namespace unvell.ReoGrid
 			{
 				this.viewportController.UpdateController();
 
-				//if (this.IsFrozen)
-				//{
-				//	this.FreezeToCell(this.FreezePos, this.FreezeArea);
-				//}
-			}
+                if (doFreeze && this.IsFrozen)
+                {
+                    this.FreezeToCell(this.FreezePos, this.FreezeArea);
+                }
+            }
 
 #if PRINT // TODO: why do this here
 			// update page breaks 
