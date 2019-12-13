@@ -209,12 +209,14 @@ namespace unvell.ReoGrid
 			if ((pos & BorderPositions.Left) == BorderPositions.Left)
 			{
 				CutBeforeVBorder(r1, c1);
-				SetVBorders(r1, c1, range.Rows, style, VBorderOwnerPosition.Left);
+                int callCount = 0;
+				SetVBorders(r1, c1, range.Rows, style, VBorderOwnerPosition.Left, ref callCount);
 			}
 			if ((pos & BorderPositions.Right) == BorderPositions.Right)
 			{
 				CutBeforeVBorder(r1, c2);
-				SetVBorders(r1, c2, range.Rows, style, VBorderOwnerPosition.Right);
+                int callCount = 0;
+				SetVBorders(r1, c2, range.Rows, style, VBorderOwnerPosition.Right, ref callCount);
 			}
 			#endregion // Left and Right
 
@@ -239,7 +241,8 @@ namespace unvell.ReoGrid
 				for (int c = c1 + 1; c < c2; c++)
 				{
 					CutBeforeVBorder(r1, c);
-					SetVBorders(r1, c, range.Rows, style, VBorderOwnerPosition.All);
+                    int callCount = 0;
+                    SetVBorders(r1, c, range.Rows, style, VBorderOwnerPosition.All, ref callCount);
 				}
 			}
 			if ((pos & BorderPositions.InsideHorizontal) == BorderPositions.InsideHorizontal)
@@ -969,9 +972,11 @@ namespace unvell.ReoGrid
 			}
 		}
 
-		private void SetVBorders(int row, int col, int rows, RangeBorderStyle borderStyle, VBorderOwnerPosition pos)
+		private void SetVBorders(int row, int col, int rows, RangeBorderStyle borderStyle, VBorderOwnerPosition pos, ref int callCount)
 		{
-			int sr = row;
+            callCount++;
+
+            int sr = row;
 			int er = row + rows - 1;
 
 			if (borderStyle != null)
@@ -1008,9 +1013,9 @@ namespace unvell.ReoGrid
 			FillVBorders(sr, col, tr - sr, borderStyle, pos);
 
 			// if border splitted by merged range, set the remains
-			if (nextStartRow != -1)
+			if (nextStartRow != -1 && callCount < 5000)
 			{
-				SetVBorders(nextStartRow, col, r2 - nextStartRow, borderStyle, pos);
+				SetVBorders(nextStartRow, col, r2 - nextStartRow, borderStyle, pos, ref callCount);
 			}
 		}
 

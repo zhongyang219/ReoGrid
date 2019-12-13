@@ -496,7 +496,8 @@ namespace unvell.ReoGrid
 
 			foreach (RGXmlVBorder b in xmlSheet.vborder)
 			{
-				SetVBorders(b.row, b.col, b.rows, b.StyleGridBorder, XmlFileFormatHelper.DecodeVBorderOwnerPos(b.pos));
+                int callCount = 0;
+                SetVBorders(b.row, b.col, b.rows, b.StyleGridBorder, XmlFileFormatHelper.DecodeVBorderOwnerPos(b.pos), ref callCount);
 			}
 			#endregion // Borders
 

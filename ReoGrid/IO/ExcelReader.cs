@@ -364,46 +364,49 @@ namespace unvell.ReoGrid.IO.OpenXML
 				bool isHidden = OpenXMLUtility.IsTrue(row.hidden);
 
 				RowHeader rowHeader;
+				rowHeader = rgSheet.GetRowHeader(rowIndex);
 
-				if (//row.customHeight == "1"
-						//&& 
-					!string.IsNullOrEmpty(row.height) && double.TryParse(row.height, out rowHeight))
-				{
-					rowHeader = rgSheet.GetRowHeader(rowIndex);
-					ushort height = (ushort)Math.Round(rowHeight * dpi / 72f);
+                if(rowHeader != null)
+                {
+				    if (//row.customHeight == "1"
+						    //&& 
+					    !string.IsNullOrEmpty(row.height) && double.TryParse(row.height, out rowHeight))
+				    {
+					    ushort height = (ushort)Math.Round(rowHeight * dpi / 72f);
 
-					rowHeader.Top = rowTop;
+                        rowHeader.Top = rowTop;
 
-					if (isHidden)
-					{
-						rowHeader.LastHeight = height;
-						rowHeader.InnerHeight = 0;
-					}
-					else
-					{
-						rowHeader.InnerHeight = height;
-						rowTop += height;
-					}
-				}
-				else
-				{
-					rowHeader = rgSheet.GetRowHeader(rowIndex);
 
-					rowHeader.Top = rowTop;
+                        if (isHidden)
+					    {
+						    rowHeader.LastHeight = height;
+						    rowHeader.InnerHeight = 0;
+					    }
+					    else
+					    {
+						    rowHeader.InnerHeight = height;
+						    rowTop += height;
+					    }
+				    }
+				    else
+				    {
+					    rowHeader.Top = rowTop;
 
-					if (isHidden)
-					{
-						rowHeader.LastHeight = defaultRowHeight;
-						rowHeader.InnerHeight = 0;
-					}
-					else
-					{
-						rowHeader.InnerHeight = defaultRowHeight;
-						rowTop += defaultRowHeight;
-					}
-				}
+					    if (isHidden)
+					    {
+						    rowHeader.LastHeight = defaultRowHeight;
+						    rowHeader.InnerHeight = 0;
+					    }
+					    else
+					    {
+						    rowHeader.InnerHeight = defaultRowHeight;
+						    rowTop += defaultRowHeight;
+					    }
+				    }
 
-				rowHeader.IsAutoHeight = !OpenXMLUtility.IsTrue(row.customHeight);
+				    rowHeader.IsAutoHeight = !OpenXMLUtility.IsTrue(row.customHeight);
+
+                }
 
 				lastRowIndex = rowIndex;
 

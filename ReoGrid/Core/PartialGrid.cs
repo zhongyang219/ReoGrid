@@ -1000,12 +1000,13 @@ namespace unvell.ReoGrid
 
 								if (data.VBorders[r, c].Style != null)
 								{
-									// is last row
-									//if (r == rows - 1)
-									//	SetVBorders(tr, tc, vrows, style, fromVBorder.Pos);
-									//else
-									//	vBorders[tr, tc].Border = fromVBorder.Border;
-									this.SetVBorders(tr, tc, vrows, style, fromVBorder.Pos);
+                                    // is last row
+                                    //if (r == rows - 1)
+                                    //	SetVBorders(tr, tc, vrows, style, fromVBorder.Pos);
+                                    //else
+                                    //	vBorders[tr, tc].Border = fromVBorder.Border;
+                                    int callCount = 0;
+                                    this.SetVBorders(tr, tc, vrows, style, fromVBorder.Pos, ref callCount);
 								}
 								else
 								{

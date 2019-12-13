@@ -1222,8 +1222,9 @@ namespace unvell.ReoGrid
 				// insert vertial border if cell has both top and bottom borders
 				if (vhasTop && vhasBottom)
 				{
-					// set vertial border
-					SetVBorders(row, c, count, vBorders[row - 1, c].Style, vBorders[row - 1, c].Pos);
+                    // set vertial border
+                    int callCount = 0;
+                    SetVBorders(row, c, count, vBorders[row - 1, c].Style, vBorders[row - 1, c].Pos, ref callCount);
 
 					//for (int r = row; r < row + count; r++)
 					//{
@@ -2821,7 +2822,10 @@ namespace unvell.ReoGrid
 		/// <returns>instance of row header</returns>
 		internal RowHeader RetrieveRowHeader(int index)
 		{
-			return this.rows[index];
+            if (index >= 0 && index < rows.Count)
+                return this.rows[index];
+            else
+                return null;
 		}
 
 		/// <summary>
@@ -2832,7 +2836,10 @@ namespace unvell.ReoGrid
 		/// <returns>instance of column header</returns>
 		internal ColumnHeader RetrieveColumnHeader(int index)
 		{
-			return this.cols[index];
+            if (index >= 0 && index < cols.Count)
+                return this.cols[index];
+            else
+                return null;
 		}
 
 		/// <summary>
