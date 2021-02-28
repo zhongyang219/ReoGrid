@@ -75,7 +75,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>reogrid-0.8.6.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WPFDebug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -241,10 +242,62 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\AddOutlineAction.cs" />
+    <Compile Include="Actions\AutoFillSerialAction.cs" />
+    <Compile Include="Actions\BaseOutlineAction.cs" />
+    <Compile Include="Actions\BaseWorksheetAction.cs" />
+    <Compile Include="Actions\CollapseOutlineAction.cs" />
+    <Compile Include="Actions\CopyRangeAction.cs" />
+    <Compile Include="Actions\CreateAutoFilterAction.cs" />
+    <Compile Include="Actions\ExpandOutlineAction.cs" />
+    <Compile Include="Actions\HideColumnsAction.cs" />
+    <Compile Include="Actions\HideRowsAction.cs" />
+    <Compile Include="Actions\InsertWorksheetAction.cs" />
+    <Compile Include="Actions\MergeRangeAction.cs" />
+    <Compile Include="Actions\MoveRangeAction.cs" />
+    <Compile Include="Actions\OutlineAction.cs" />
+    <Compile Include="Actions\RemoveColumnsAction.cs" />
+    <Compile Include="Actions\RemoveOutlineAction.cs" />
+    <Compile Include="Actions\RemoveRangeBorderAction.cs" />
+    <Compile Include="Actions\RemoveRangeDataAction.cs" />
+    <Compile Include="Actions\RemoveWorksheetAction.cs" />
+    <Compile Include="Actions\SetCellDataAction.cs" />
+    <Compile Include="Actions\SetColumnsWidthAction.cs" />
+    <Compile Include="Actions\SetPartialGridAction.cs" />
+    <Compile Include="Actions\SetRangeBorderAction.cs" />
+    <Compile Include="Actions\SetRangeDataAction.cs" />
+    <Compile Include="Actions\SetRangeDataFormatAction.cs" />
+    <Compile Include="Actions\SetRangeStyleAction.cs" />
+    <Compile Include="Actions\SetRowsHeightAction.cs" />
+    <Compile Include="Actions\UnhideColumnsAction.cs" />
+    <Compile Include="Actions\UnhideRowsAction.cs" />
+    <Compile Include="Actions\UnmergeRangeAction.cs" />
+    <Compile Include="Actions\WorkbookAction.cs" />
+    <Compile Include="Actions\WorksheetActionGroup.cs" />
+    <Compile Include="Actions\WorksheetReusableAction.cs" />
+    <Compile Include="Actions\WorksheetReusableActionGroup.cs" />
     <Compile Include="Android\Graphics.cs" />
     <Compile Include="Android\Renderer.cs" />
     <Compile Include="Android\ReoGridView.cs" />
     <Compile Include="Android\Platform.cs" />
+    <Compile Include="Actions\BackupRangeInfo.cs" />
+    <Compile Include="CellTypes\ButtonCell.cs" />
+    <Compile Include="CellTypes\CellBody.cs" />
+    <Compile Include="CellTypes\CellTypesManager.cs" />
+    <Compile Include="CellTypes\CheckboxCell.cs" />
+    <Compile Include="CellTypes\DatePickerCell.cs" />
+    <Compile Include="CellTypes\DropdownCell.cs" />
+    <Compile Include="CellTypes\DropdownListCell.cs" />
+    <Compile Include="CellTypes\ColumnDropdownListCell.cs" />
+    <Compile Include="CellTypes\HyperlinkCell.cs" />
+    <Compile Include="CellTypes\ICellBody.cs" />
+    <Compile Include="CellTypes\IHeaderBody.cs" />
+    <Compile Include="CellTypes\ImageButtonCell.cs" />
+    <Compile Include="CellTypes\ImageCell.cs" />
+    <Compile Include="CellTypes\NegativeProgressCell.cs" />
+    <Compile Include="CellTypes\NumberInputCell.cs" />
+    <Compile Include="CellTypes\ProgressCell.cs" />
+    <Compile Include="CellTypes\RadioButtonCell.cs" />
     <Compile Include="Chart\AreaLine.cs" />
     <Compile Include="Chart\Axis.cs" />
     <Compile Include="Chart\Bar.cs" />
@@ -289,6 +342,13 @@
     <Compile Include="Core\Worksheet\Selection.cs" />
     <Compile Include="Core\Worksheet\Utility.cs" />
     <Compile Include="Core\Worksheet\WorksheetInterface.cs" />
+    <Compile Include="DataFormat\CurrencyDataFormatter.cs" />
+    <Compile Include="DataFormat\DataFormatterManager.cs" />
+    <Compile Include="DataFormat\GeneralDataFormatter.cs" />
+    <Compile Include="DataFormat\NumberDataFormatter.cs" />
+    <Compile Include="DataFormat\DateTimeDataFormatter.cs" />
+    <Compile Include="DataFormat\PercentDataFormatter.cs" />
+    <Compile Include="DataFormat\TextDataFormatter.cs" />
     <Compile Include="Drawing\Canvas.cs" />
     <Compile Include="Drawing\DrawingContext.cs" />
     <Compile Include="Drawing\Events.cs" />
@@ -311,6 +371,8 @@
     <Compile Include="Graphics\Point.cs" />
     <Compile Include="Graphics\Rectangle.cs" />
     <Compile Include="Graphics\Size.cs" />
+    <Compile Include="Actions\InsertRowsAction.cs" />
+    <Compile Include="Actions\InsertColumnsAction.cs" />
     <Compile Include="Interaction\KeyCode.cs" />
     <Compile Include="Interaction\MouseButtons.cs" />
     <Compile Include="Interaction\CursorStyle.cs" />
@@ -334,6 +396,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Actions\RemoveRangeStyleAction.cs" />
+    <Compile Include="Actions\StepRangeFontSizeAction.cs" />
+    <Compile Include="Actions\RemoveRowsAction.cs" />
     <Compile Include="Test\RichTextTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,8 +416,7 @@
     <Compile Include="WinForm\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Actions.cs" />
-    <Compile Include="CellTypes.cs" />
+    <Compile Include="Actions\ClearOutlineAction.cs" />
     <Compile Include="Chart\Interface.cs" />
     <Compile Include="Common\ActionManager.cs" />
     <Compile Include="Common\GraphicsToolkit.cs" />
@@ -516,7 +580,6 @@
     <Compile Include="Worksheet.cs" />
     <Compile Include="ExtendTrigger.cs" />
     <Compile Include="Utility\RGUtility.cs" />
-    <Compile Include="Script\RSFunctions.cs" />
     <Compile Include="Script\RSObjects.cs" />
     <Compile Include="Script\ScriptExtend.cs" />
     <Compile Include="Settings.cs" />
@@ -528,7 +591,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\theme1.xml" />
-    <None Include="reogrid-0.8.6.pfx" />
     <None Include="Resources\base_lib.reo" />
     <None Include="Resources\EULA_EN.txt" />
     <Content Include="Resources\cross.cur" />

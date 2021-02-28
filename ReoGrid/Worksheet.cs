@@ -410,24 +410,10 @@ namespace unvell.ReoGrid
 			if (row < 0 || col < 0 || row >= this.rows.Count || col >= this.cols.Count) return;
 
 			this.FreezeToCell(row, col, FreezeArea.LeftTop);
-			//this.FreezePos = new CellPosition(row, col);
-
-			//if (viewportController is IFreezableViewportController)
-			//{
-			//	var lastFreezePos = ((IFreezableViewportController)viewportController).FreezePosition;
-
-			//	if (lastFreezePos == FreezeArea.None)
-			//	{
-			//		lastFreezePos = FreezeArea.LeftTop;
-			//	}
-
-			//	FreezeToCell(row, col, lastFreezePos);
-			//}
-			////else
-			////{
-			////	throw new FreezeUnsupportedException();
-			////}
 		}
+
+		private CellPosition lastFrozenPosition;
+		private FreezeArea lastFrozenArea = FreezeArea.None;
 
 		/// <summary>
 		/// Freezes worksheet at specified cell position and specifies the freeze areas.
@@ -437,6 +423,18 @@ namespace unvell.ReoGrid
 		/// <param name="area">Specifies the frozen panes.</param>
 		public void FreezeToCell(int row, int col, FreezeArea area)
 		{
+			/////////////////////////////////////////////////////////////////
+			// fix issue #151, #172, #313
+			if (lastFrozenPosition == new CellPosition(row, col) && lastFrozenArea == area)
+			{
+				// skip to perform freeze if forzen position and area are not changed
+				return;
+			}
+
+			lastFrozenPosition = new CellPosition(row, col);
+			lastFrozenArea = area;
+			/////////////////////////////////////////////////////////////////
+
 			if (this.viewportController != null)
 			{
 				// update viewport bounds - sometimes the viewport may cannot get the correct size for freezing,
@@ -1030,7 +1028,7 @@ namespace unvell.ReoGrid
 		{
 			if (cell == null) return null;
 
-			if (cell.IsMergedCell)
+			if (cell.InsideMergedRange)
 			{
 				if (cell.IsStartMergedCell)
 					return cell;
